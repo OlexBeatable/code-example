@@ -1,0 +1,16 @@
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <mat-form-field class="full-width">
+            <textarea formControlName="text" matInput placeholder="Text"></textarea>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="user" placeholder="User">
+        </mat-form-field>
+        <div class="form-footer">
+            <button mat-raised-button type="button" (click)="onCloseCancel()">Cancel</button>
+            <button mat-raised-button type="submit" color="primary">
+                Confirm
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>

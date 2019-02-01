@@ -1,0 +1,45 @@
+<app-new-message (onMessageAdded)="onMessageAdded($event)"></app-new-message>
+<mat-form-field class="select">
+    <mat-select placeholder="Show for the" [(value)]="params['time']" (selectionChange)="onTimeChange()">
+        <mat-option  value="day">Day</mat-option>
+        <mat-option  value="month">Month</mat-option>
+        <mat-option  value="year">Year</mat-option>
+        <mat-option  value="alltime">All time</mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+<table mat-table [dataSource]="messages" class="mat-elevation-z8" style="width: 100%">
+    <ng-container matColumnDef="text">
+        <th mat-header-cell *matHeaderCellDef class="custom-padding"> Text </th>
+        <td mat-cell *matCellDef="let element" class="custom-padding"> {{element.text}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="user" *ngIf="isAdmin">
+        <th mat-header-cell *matHeaderCellDef > User </th>
+        <td mat-cell *matCellDef="let element"> {{element.user}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="datecreated">
+        <th mat-header-cell *matHeaderCellDef class="custom-padding" nowrap> Date created </th>
+        <td mat-cell *matCellDef="let element" class="custom-padding" nowrap>
+            {{ (element.datecreated / 1000 | amFromUnix) | amDateFormat: 'YYYY-MM-DD HH:mm'}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="datemodified">
+        <th mat-header-cell *matHeaderCellDef class="custom-padding" nowrap> Date modified </th>
+        <td mat-cell *matCellDef="let element" class="custom-padding" nowrap>
+            {{element.modified ? ((element.modified / 1000 | amFromUnix) | amDateFormat: 'YYYY-MM-DD HH:mm') : null}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" *ngIf="isAdmin">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Actions </th>
+        <td mat-cell *matCellDef="let element" style="text-align: center">
+            <button mat-raised-button color="primary" (click)="editMessage(element._id)">Edit</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="isAdmin ? adminDisplayedColumns: userDisplayedColumns "></tr>
+    <tr mat-row *matRowDef="let row; columns: isAdmin ? adminDisplayedColumns: userDisplayedColumns ;"></tr>
+</table>

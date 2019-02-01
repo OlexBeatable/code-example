@@ -1,0 +1,10 @@
+<div id="sidebar">
+    <mat-nav-list>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/messages']">
+            <mat-icon class="sidenav-icon">message</mat-icon> {{ 'Messages' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/users']" *ngIf="isAdmin">
+            <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Users' | translate }}
+        </a>
+    </mat-nav-list>
+</div>

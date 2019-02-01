@@ -1,0 +1,28 @@
+
+
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <mat-form-field class="full-width">
+            <input formControlName="name" matInput required placeholder="Name">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width" *ngIf="!data.user">
+            <input matInput formControlName="password" type="password" required placeholder="Password">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="role" required placeholder="Role">
+        </mat-form-field>
+        <div class="form-footer">
+            <button mat-raised-button type="button" (click)="onCloseCancel()">Cancel</button>
+            <button mat-raised-button type="submit" color="primary">
+                Confirm
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
+
+
+
+
+

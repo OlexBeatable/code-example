@@ -1,0 +1,6 @@
+<mat-card>
+    <mat-form-field >
+        <input matInput placeholder="New message" #message>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submit(message.value)">Send</button>
+</mat-card>
